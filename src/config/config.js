@@ -13,7 +13,7 @@ const config = {
         PORT: process.env.PORT || DEVPORT,
         routes:{
             base:'/api',
-            products:'/api/producos',
+            products:'/api/productos',
             carts: '/api/carrito',
         },
     },

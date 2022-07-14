@@ -4,7 +4,7 @@ import { errors } from "../utils/errors.js";
 import { request,response } from "express";
 
 const apiCart = new FileSystemCont(config.db.carts)
-const apiProudcts = new FileSystemCont(config.db.products)
+const apiProducts = new FileSystemCont(config.db.products)
 
 const baseCart = {products:[],};
 
@@ -61,17 +61,17 @@ const cartPostProducts = async (request,response)=>{
         const {id}=request.params
         const {productId}=request.body
 
-        const cart= apiCart.getById(id);
-        if(!cart){
+        const carts= apiCart.getById(id);
+        if(!carts){
             throw{error: errors.messages.noCart}
         }
-        const product = await apiProudcts.getById(productId)
+        const product = await apiProducts.getById(productId)
         if(!product){
             throw{error: errors.messages.noProduct}
         }
-        cart.products.push(product)
+        carts.products.push(product)
 
-        const cartUpdate = await apiCart.updateById(id, cart)
+        const cartUpdate = await apiCart.updateById(id, carts)
         response.send(cartUpdate)
     }catch(error){
         response.send(error)

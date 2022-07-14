@@ -4,6 +4,13 @@ const getProducts = async () =>{
     return products;
 }
 
+const getCarritos = async () => {
+    const response = await fetch('/api/carrito')
+    const carritos = await response.json()
+    return carritos
+}
+
 export const apiRoutes ={
-    getProducts
+    getProducts,
+    getCarritos,
 }
