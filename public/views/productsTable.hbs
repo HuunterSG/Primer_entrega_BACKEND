@@ -4,13 +4,15 @@
     <table>
         <tr class="contTitle">
             <th>Nombre</th>
+            <th>Descripcion</th>
             <th>Precio</th>
             <th>Stock</th>
             <th>Foto</th>
         </tr>
         {{#each products}}
         <tr class="contTitle">
-            <td>{{this.title}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.description}}</td>
             <td>${{this.price}}</td>
             <td>Stock: {{this.stock}}</td>
             <td><img src={{this.img}} alt="image"></td>

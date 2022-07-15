@@ -29,7 +29,7 @@ const cartDelete = async (request, response)=>{
             throw {error:errors.messages.noCart}
         }
         const cartDelete= await apiCart.deleteById(id)
-
+        
         response.send({
             mensaje:'Carrito eliminado con exito',
             cartDelete: cartDelete,
@@ -59,19 +59,23 @@ const cartGetProducts = async (request, response)=>{
 const cartPostProducts = async (request,response)=>{
     try{
         const {id}=request.params
-        const {productId}=request.body
-
-        const carts= apiCart.getById(id);
+        const productId=request.body["id"]
+        
+        const carts= await apiCart.getById(id);
+        console.log("soy un carrito" + carts)
         if(!carts){
             throw{error: errors.messages.noCart}
         }
         const product = await apiProducts.getById(productId)
+        
         if(!product){
             throw{error: errors.messages.noProduct}
         }
         carts.products.push(product)
-
+        console.log(carts.products)
+        console.log("como todo funciono bien le hago un push")
         const cartUpdate = await apiCart.updateById(id, carts)
+        console.log(cartUpdate)
         response.send(cartUpdate)
     }catch(error){
         response.send(error)
